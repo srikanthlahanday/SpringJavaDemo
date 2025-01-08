@@ -1,0 +1,6 @@
+environment:
+  name: casestudy
+  identifier: casestudy
+  orgIdentifier: default
+  projectIdentifier: default_project
+  type: PreProduction
