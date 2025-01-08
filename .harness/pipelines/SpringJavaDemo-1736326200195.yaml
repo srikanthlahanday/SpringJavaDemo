@@ -32,28 +32,14 @@ pipeline:
                   identifier: Run_2
                   spec:
                     shell: Sh
-                    command: |-
-                      mvn clean install
-                      echo $(pwd)
-              - step:
-                  type: Owasp
-                  name: Owasp_1
-                  identifier: Owasp_1
-                  spec:
-                    mode: orchestration
-                    config: default
-                    target:
-                      type: repository
-                      workspace: target/my-app-1.0-SNAPSHOT.jar
-                      detection: auto
-                    advanced:
-                      log:
-                        level: info
+                    command: mvn clean verify install
               - step:
                   type: Run
                   name: Run_3
                   identifier: Run_3
-                  spec: {}
+                  spec:
+                    shell: Sh
+                    command: echo $workspace
           platform:
             os: Linux
             arch: Amd64
