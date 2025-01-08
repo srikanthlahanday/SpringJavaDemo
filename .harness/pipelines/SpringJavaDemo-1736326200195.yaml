@@ -21,29 +21,36 @@ pipeline:
             steps:
               - step:
                   identifier: echo
-                  name: echo
+                  name: Welcome msg
                   spec:
+                    shell: Sh
                     command: echo hello world
                   timeout: ""
                   type: Run
               - step:
                   type: Run
-                  name: Run_2
+                  name: Maven Build
                   identifier: Run_2
                   spec:
                     shell: Sh
                     command: mvn clean verify install
               - step:
-                  type: Run
-                  name: Run_3
-                  identifier: Run_3
+                  type: Owasp
+                  name: Owasp_1
+                  identifier: Owasp_1
                   spec:
-                    shell: Sh
-                    command: echo $workspace
+                    mode: orchestration
+                    config: default
+                    target:
+                      type: repository
+                      detection: auto
+                    advanced:
+                      log:
+                        level: info
           platform:
             os: Linux
             arch: Amd64
           runtime:
-            type: Docker
+            type: Cloud
             spec: {}
         type: CI
