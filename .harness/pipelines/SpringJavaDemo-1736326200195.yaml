@@ -32,7 +32,9 @@ pipeline:
                   identifier: Run_2
                   spec:
                     shell: Sh
-                    command: mvn clean install
+                    command: |-
+                      mvn clean install
+                      echo $(pwd)
               - step:
                   type: Owasp
                   name: Owasp_1
@@ -46,6 +48,11 @@ pipeline:
                     advanced:
                       log:
                         level: info
+              - step:
+                  type: Run
+                  name: Run_3
+                  identifier: Run_3
+                  spec: {}
           platform:
             os: Linux
             arch: Amd64
