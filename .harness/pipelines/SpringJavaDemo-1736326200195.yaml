@@ -44,6 +44,7 @@ pipeline:
                     config: default
                     target:
                       type: repository
+                      workspace: target/my-app-1.0-SNAPSHOT.jar
                       detection: auto
                     advanced:
                       log:
