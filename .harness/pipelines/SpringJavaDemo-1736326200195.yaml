@@ -47,6 +47,14 @@ pipeline:
                     advanced:
                       log:
                         level: info
+              - step:
+                  type: ArtifactoryUpload
+                  name: ArtifactoryUpload_1
+                  identifier: ArtifactoryUpload_1
+                  spec:
+                    connectorRef: casestudyJan
+                    target: libs-snapshot-local/
+                    sourcePath: target/helloworld-0.0.1-SNAPSHOT.jar
           platform:
             os: Linux
             arch: Amd64
