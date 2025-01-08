@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_srikanthlahanday_SpringJavaDemo_1736326201837-pr-trigger-input-set
+  identifier: Build_srikanthlahanday_SpringJavaDemo_1736326201837prtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: default_project
+  pipeline:
+    identifier: Build_srikanthlahanday_SpringJavaDemo_1736326201837
+    properties:
+      ci:
+        codebase:
+          build:
+            type: PR
+            spec:
+              number: <+trigger.prNumber>
