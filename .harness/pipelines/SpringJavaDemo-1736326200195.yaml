@@ -63,6 +63,55 @@ pipeline:
             spec: {}
         type: CI
     - stage:
+        name: Check Disk Space
+        identifier: Check_Disk_Space
+        description: ""
+        type: Custom
+        spec:
+          execution:
+            steps:
+              - step:
+                  type: ShellScript
+                  name: ShellScript_1
+                  identifier: ShellScript_1
+                  spec:
+                    shell: Bash
+                    executionTarget:
+                      host: ec2-13-232-78-4.ap-south-1.compute.amazonaws.com
+                      connectorRef: harness_sshprivatekeyharnessawsdeploy
+                      workingDirectory: /tmp
+                    source:
+                      type: Inline
+                      spec:
+                        script: |-
+                          #!/bin/bash
+
+                          # Get the disk usage percentage for the root filesystem ("/")
+                          disk_usage=$(df / | grep / | awk '{ print $5 }' | sed 's/%//')
+
+                          # Check if the disk usage is greater than or less than 70%
+                          if [ "$disk_usage" -gt 70 ]; then
+                            echo "Disk space is over 70%. Current usage: $disk_usage%"
+                          elif [ "$disk_usage" -lt 70 ]; then
+                            echo "Disk space is under 70%. Current usage: $disk_usage%"
+                          else
+                            echo "Disk space usage is exactly 70%."
+                          fi
+                    environmentVariables: []
+                    outputVariables: []
+                  timeout: 10m
+              - step:
+                  type: Email
+                  name: Email_1
+                  identifier: Email_1
+                  spec:
+                    to: srikanth.lahanday@opustechglobal.com
+                    cc: ""
+                    subject: space
+                    body: "No space "
+                  timeout: 10m
+        tags: {}
+    - stage:
         name: deploy
         identifier: deploy
         description: ""
